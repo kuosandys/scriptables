@@ -88,3 +88,5 @@ export interface IDeviceDisplayData {
   healthIdx: number; // health index
   pressure: number; // surface pressure aka atmospheric pressure in mbar
 }
+
+export type HealthIdx = -1 | 0 | 1 | 2 | 3 | 4;

@@ -11,7 +11,7 @@ try {
     Script.setWidget(widget);
   } else {
     // for development
-    widget.presentSmall();
+    widget.presentMedium();
   }
 } catch (err) {
   console.log((err as Error).message);
