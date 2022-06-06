@@ -5,7 +5,11 @@
   "repository": "github.com/kuosandys/scriptables",
   "author": "Sandy S Kuo <kuo.sandys@gmail.com>",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "esbuild ./src/netatmo --outdir=dist --minify --target=esnext --format=esm --bundle",
+    "typecheck": "./node_modules/.bin/tsc --noEmit",
+    "compile": "yarn typecheck && yarn build"
+  },
   "type": "module",
   "dependencies": {},
   "devDependencies": {
