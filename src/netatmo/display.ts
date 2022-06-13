@@ -39,25 +39,6 @@ const COLORS = {
   black: new Color('#000000'),
 };
 
-function getRelativeTime(date: Date): string {
-  const now = new Date();
-  const diff = now.getTime() - date.getTime();
-  const diffSeconds = Math.floor(diff / 1000);
-  const diffMinutes = Math.floor(diff / 1000 / 60);
-  const diffHours = Math.floor(diff / 1000 / 60 / 60);
-  const diffDays = Math.floor(diff / 1000 / 60 / 60 / 24);
-
-  if (diffSeconds < 60) {
-    return `${diffSeconds} seconds ago`;
-  } else if (diffMinutes < 60) {
-    return `${diffMinutes} minutes ago`;
-  } else if (diffHours < 24) {
-    return `${diffHours} hours ago`;
-  } else {
-    return `${diffDays} days ago`;
-  }
-}
-
 function formatDashboardData(
   data: IDeviceDisplayData
 ): Record<string, { value: string; healthIdx: HealthIdx }> {
@@ -123,8 +104,9 @@ export async function createWidget(
     widget.addSpacer(3);
 
     // display last sync time
-    const relativeTime = getRelativeTime(d.time);
-    const lastUpdated = widget.addText(`last updated ${relativeTime}`);
+    const relativeDateFormatter = new RelativeDateTimeFormatter();
+    const relativeDate = relativeDateFormatter.string(d.time, new Date());
+    const lastUpdated = widget.addText(`last updated ${relativeDate}`);
     lastUpdated.font = FONTS.small;
     lastUpdated.textColor = COLORS.grey;
 
