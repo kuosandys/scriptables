@@ -14,6 +14,6 @@ Netatmo has an official iOS app that provides access to pretty much the same inf
 
 1. Create a new app in the [Netatmo developer portal](https://dev.netatmo.com/apps/createanapp), noting down your app's client ID and client secret.
 2. Clone this repo and install dependencies with `yarn`.
-3. Copy `config.template.json` and rename to `config.json` in the same directory. Replace the empty strings with your own config values.
+3. Replace the empty strings in `/dist/netatmo-config.js` with your own config values.
 4. Run `yarn compile` to generate the `netatmo.js` script.
-5. Follow insturctions from the Scriptable app to add the script. For best results, please run it from a medium-sized widget.
+5. Follow instructions from the Scriptable app to add the script. For best results, please run it from a medium-sized widget.

@@ -3,7 +3,8 @@ import { createWidget } from './display';
 import { fetchData } from './fetch';
 
 try {
-  const homeCoachData = await fetchData();
+  const netatmoConfig = importModule('netatmo-config');
+  const homeCoachData = await fetchData(netatmoConfig);
   const devicesData = parseData(homeCoachData);
   const widget = await createWidget(devicesData);
 

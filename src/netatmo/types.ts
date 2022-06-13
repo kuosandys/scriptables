@@ -90,3 +90,10 @@ export interface IDeviceDisplayData {
 }
 
 export type HealthIdx = -1 | 0 | 1 | 2 | 3 | 4;
+
+export interface IConfig {
+  CLIENT_ID: string;
+  CLIENT_SECRET: string;
+  USERNAME: string;
+  PASSWORD: string;
+}

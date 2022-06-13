@@ -1,16 +1,15 @@
-import * as NETATMO_CONFIG from './config.json';
-import { IHomeCoachData } from './types';
+import { IConfig, IHomeCoachData } from './types';
 
-async function getAccessToken(): Promise<string> {
+async function getAccessToken(config: IConfig): Promise<string> {
   const request = new Request('https://api.netatmo.com/oauth2/token') as any;
   request.method = 'POST';
 
   const params = {
-    client_id: NETATMO_CONFIG.CLIENT_ID,
-    client_secret: NETATMO_CONFIG.CLIENT_SECRET,
+    client_id: config.CLIENT_ID,
+    client_secret: config.CLIENT_SECRET,
     grant_type: 'password',
-    username: NETATMO_CONFIG.USERNAME,
-    password: NETATMO_CONFIG.PASSWORD,
+    username: config.USERNAME,
+    password: config.PASSWORD,
     scope: 'read_homecoach',
   };
   for (const [key, value] of Object.entries(params)) {
@@ -47,9 +46,9 @@ async function getHomeCoachData(accessToken: string): Promise<IHomeCoachData> {
   return data;
 }
 
-export async function fetchData(): Promise<IHomeCoachData> {
+export async function fetchData(config: IConfig): Promise<IHomeCoachData> {
   try {
-    const accessToken = await getAccessToken();
+    const accessToken = await getAccessToken(config);
     return getHomeCoachData(accessToken);
   } catch (err) {
     return Promise.reject(err);
