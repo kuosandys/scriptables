@@ -1,5 +1,6 @@
 import { parseData } from './dataUtils';
 import { createWidget } from './display';
+import { createErrorWidget } from './error';
 import { fetchData } from './fetch';
 
 try {
@@ -15,7 +16,14 @@ try {
     widget.presentMedium();
   }
 } catch (err) {
-  console.log((err as Error).message);
+  const errorMessage = (err as Error).message ?? (err as any).toString();
+
+  if (config.runsInWidget) {
+    Script.setWidget(await createErrorWidget(errorMessage));
+  } else {
+    // for development
+    console.log(errorMessage);
+  }
 }
 
 Script.complete();
